@@ -1,0 +1,47 @@
+# Datos
+*.csv
+*.tsv
+*.xls
+*.xlsx
+*.parquet
+*.feather
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+*.db
+*.sqlite
+*.zip
+*.gz
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Modelos / artifacts / experiment tracking
+*.joblib
+*.onnx
+*.pt
+*.pth
+mlruns/
+wandb/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Env / secrets
+.env
+.env.*
+*.key
+*credentials*.json
+service-account*.json
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
