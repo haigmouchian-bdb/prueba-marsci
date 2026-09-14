@@ -7,11 +7,12 @@ from utils.func import engineer_features, load_data, load_model, predict, save_p
 INPUT_PATH = Path("data/inputs/mmm_demo_scoring_input.csv")
 MODEL_PATH = Path("data/model/mmm_demo_model.pkl")
 OUTPUT_PATH = Path("data/outputs/mmm_demo_predictions.csv")
+TRAINING_WEEKS = 104  # weeks used to train mmm_demo_model.pkl - keeps trend continuous
 
 
 def main() -> None:
     df = load_data(INPUT_PATH)
-    df_features = engineer_features(df)
+    df_features = engineer_features(df, trend_start=TRAINING_WEEKS)
     model = load_model(MODEL_PATH)
     df["predicted_sales"] = predict(df_features, model)
     save_predictions(df[["date", "predicted_sales"]], OUTPUT_PATH)

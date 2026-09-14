@@ -27,12 +27,16 @@ def apply_adstock(series: pd.Series, decay: float) -> np.ndarray:
     return adstocked
 
 
-def engineer_features(df: pd.DataFrame, decay: float = 0.5) -> pd.DataFrame:
-    """Add adstocked spend columns and a linear time trend."""
+def engineer_features(df: pd.DataFrame, decay: float = 0.5, trend_start: int = 0) -> pd.DataFrame:
+    """Add adstocked spend columns and a linear time trend.
+
+    trend_start lets scoring continue the trend index where training left off,
+    instead of resetting it to 0 for every new batch of weeks.
+    """
     df = df.copy()
     for channel in SPEND_CHANNELS:
         df[f"{channel}_adstock"] = apply_adstock(df[channel], decay=decay)
-    df["trend"] = np.arange(len(df))
+    df["trend"] = np.arange(trend_start, trend_start + len(df))
     return df
 
 
